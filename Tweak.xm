@@ -8,7 +8,7 @@
   NSString *newString = [URLString copy];
   if ([URLString hasPrefix:prefixToReplace]) {
     NSLog(@"[iHide] Hooked +[NSURL URLWithString:] -> %@", URLString);
-    [newString stringByReplacingOccurrencesOfString:prefixToReplace withString:replaceString]
+    [newString stringByReplacingOccurrencesOfString:prefixToReplace withString:replaceString];
     NSURL *url = [NSURL URLWithString:newString];
     return url;
   }
