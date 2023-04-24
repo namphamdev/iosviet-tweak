@@ -3,14 +3,15 @@
 
 %hook NSURL
 + (instancetype)URLWithString:(NSString *)URLString {
-  NSString *replaceString = @"https://iosviet.node.np-platform.com/check-lic";
+  NSString *baseUrl = [URLString absoluteString];
   NSString *prefixToReplace = @"https://iosviet.co/check-lic";
-  NSString *newString = [URLString copy];
-  if ([URLString hasPrefix:prefixToReplace]) {
-    NSLog(@"[iHide] Hooked +[NSURL URLWithString:] -> %@", URLString);
-    [newString stringByReplacingOccurrencesOfString:prefixToReplace withString:replaceString];
-    NSURL *url = [NSURL URLWithString:newString];
-    return url;
+  NSString *replaceString = @"https://iosviet.node.np-platform.com/check-lic";
+  NSString *newString = @"";
+  if ([baseUrl hasPrefix:prefixToReplace]) {
+    NSLog(@"[NPDev] Hooked -> %@", baseUrl);
+    newString = [baseUrl stringByReplacingOccurrencesOfString:prefixToReplace withString:replaceString];
+    NSLog(@"[NPDev] Patched -> %@", newString);
+    URLString = newString;
   }
   return %orig;
 }
