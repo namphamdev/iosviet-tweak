@@ -9,7 +9,8 @@
   if ([URLString hasPrefix:prefixToReplace]) {
     NSLog(@"[iHide] Hooked +[NSURL URLWithString:] -> %@", URLString);
     [newString stringByReplacingOccurrencesOfString:prefixToReplace withString:replaceString]
-    return newString;
+    NSURL *url = [NSURL URLWithString:newString];
+    return url;
   }
   return %orig;
 }
